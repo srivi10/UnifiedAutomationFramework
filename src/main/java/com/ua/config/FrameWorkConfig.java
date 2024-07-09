@@ -1,13 +1,8 @@
 package com.ua.config;
 
 
-import com.ua.config.Converters.ConverStringtoURL;
-import com.ua.config.Converters.ConverterStringToBrowser;
-import com.ua.config.Converters.ConverterStringToRemoteModeBrowserType;
-import com.ua.config.Converters.ConverterStringToRunModeBrowserType;
-import com.ua.enums.BrowserRemoteMode;
-import com.ua.enums.BrowserType;
-import com.ua.enums.RunModeBrowserType;
+import com.ua.config.Converters.*;
+import com.ua.enums.*;
 import org.aeonbits.owner.Config;
 
 import java.net.URL;
@@ -24,20 +19,23 @@ public interface FrameWorkConfig extends Config {
     @ConverterClass(ConverterStringToBrowser.class)
     BrowserType browser();
 
-
     @Key("runModeBrowser")
     @ConverterClass(ConverterStringToRunModeBrowserType.class)
-    RunModeBrowserType browserRunMode();
+    RunModeType browserRunMode();
 
     @Key("browserRemoteMode")
     @ConverterClass(ConverterStringToRemoteModeBrowserType.class)
     BrowserRemoteMode browserRemoteMode();
 
+//    @Key("runModeMobile")
+//    BrowserRemoteMode mobileRunMode();
+
     @Key("runModeMobile")
-    BrowserRemoteMode mobileRunMode();
+    @ConverterClass(ConverterStringToRunModeBrowserType.class)
+    RunModeType mobileRunMode();
 
     @Key("mobileRemoteMode")
-    BrowserRemoteMode mobileRemoteMode();
+    MobileRemoteModeType mobileRemoteMode();
 
     @ConverterClass(ConverStringtoURL.class)
     URL seleniumGridURL();
@@ -45,7 +43,10 @@ public interface FrameWorkConfig extends Config {
     @ConverterClass(ConverStringtoURL.class)
     URL selenoidURL();
 
-    @ConverterClass(ConverStringtoURL.class)
-    @DefaultValue("https:/127.0.0.1:4723/wd/hub")
+    @Key("seleniumGridURL")
     URL localAppiumServerURL();
+
+    @ConverterClass(StringToMobilePlatformTypeConverter.class)
+    @DefaultValue("ios")
+    MobilePlatformType mobilePlatformType();
 }
