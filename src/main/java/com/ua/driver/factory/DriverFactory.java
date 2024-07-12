@@ -1,32 +1,31 @@
 package com.ua.driver.factory;
 
-import com.ua.driver.entity.DriverData;
-import com.ua.driver.factory.local.mobile.LocalMobileDriverFactory;
-import com.ua.driver.factory.mobile.remote.RemoteMobileDriverFactory;
-import com.ua.driver.factory.web.local.LocalDriverFactory;
-import com.ua.driver.factory.web.remote.RemoteDriverFactory;
+import com.ua.driver.*;
 import com.ua.enums.RunModeType;
-import org.openqa.selenium.WebDriver;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.function.Supplier;
 
 public class DriverFactory {
 
     private DriverFactory() {
     }
 
-    public static WebDriver getDriverForWeb(DriverData driverData) {
-        if (driverData.getRunModeType() == RunModeType.LOCAL) {
-            return LocalDriverFactory.getDriver(driverData.getBrowserType());
-        } else {
-            return RemoteDriverFactory.getDriver(driverData.getBrowserRemoteMode(), driverData.getBrowserType());
-        }
+    private static final Map<RunModeType, Supplier<IWebDriver>> WEB = new EnumMap<>(RunModeType.class);
+    private static final Map<RunModeType, Supplier<IMobileDriver>> MOBILE = new EnumMap<>(RunModeType.class);
 
+    static {
+        WEB.put(RunModeType.LOCAL, LocalWebDriverImpl::new);
+        WEB.put(RunModeType.REMOTE, LocalWebDriverImpl::new);
+        MOBILE.put(RunModeType.LOCAL, LocalMobileDriverImpl::new);
+        MOBILE.put(RunModeType.REMOTE, RemoteMobileDriverImpl::new);
     }
 
-    public static WebDriver getDriverForMobile(DriverData driverData) {
-        if (driverData.getRunModeType() == RunModeType.LOCAL) {
-            return LocalMobileDriverFactory.getDriver(driverData.getMobilePlatformType());
-        } else {
-            return RemoteMobileDriverFactory.getDriver(driverData.getMobileRemoteModeType(), driverData.getMobilePlatformType());
-        }
+    public static IWebDriver getDriverForWeb(RunModeType runModeType) {
+        return WEB.get(runModeType).get();
+    }
+
+    public static IMobileDriver getDriverForMobile(RunModeType runModeType) {
+        return MOBILE.get(runModeType).get();
     }
 }
