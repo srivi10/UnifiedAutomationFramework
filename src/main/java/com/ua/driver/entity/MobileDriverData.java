@@ -2,10 +2,10 @@ package com.ua.driver.entity;
 
 import com.ua.enums.MobilePlatformType;
 import com.ua.enums.MobileRemoteModeType;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Builder
+@AllArgsConstructor
 @Getter
 public class MobileDriverData {
     private MobilePlatformType mobilePlatformType;

@@ -1,8 +1,5 @@
 package com.ua.driver;
 
-
-
-import com.ua.driver.entity.DriverData;
 import com.ua.driver.entity.MobileDriverData;
 import com.ua.driver.entity.WebDriverData;
 import com.ua.driver.factory.DriverFactory;
@@ -13,20 +10,26 @@ import static com.ua.config.factory.ConfigFactory.getConfig;
 
 public class Driver {
 
-    private Driver(){}
+    private Driver() {
+    }
 
     public static void initDriverForWeb() throws InterruptedException {
-        WebDriverData driverData = WebDriverData.builder().browserType(getConfig().browser()).browserRemoteMode(getConfig().browserRemoteMode()).build();
+        if(DriverManager.getDriver() == null){
+        WebDriverData driverData = new WebDriverData(getConfig().browser(), getConfig().browserRemoteMode());
         WebDriver driver = DriverFactory.getDriverForWeb(getConfig().browserRunMode()).getDriver(driverData);
-        driver.quit();
+        DriverManager.setDriver(driver);
+    }}
+
+    public static void initDriverForMobile() throws NullPointerException {
+
+            MobileDriverData driverData = new MobileDriverData(MobilePlatformType.IOS, getConfig().mobileRemoteMode());
+            WebDriver driver = DriverFactory.getDriverForMobile(getConfig().mobileRunMode()).getDriver(driverData);
+            DriverManager.setDriver(driver);
     }
 
-    public static void initDriverForMobile() throws InterruptedException {
-        MobileDriverData driverData = MobileDriverData.builder().mobilePlatformType(MobilePlatformType.ANDROID).mobileRemoteModeType(getConfig().mobileRemoteMode()).build();
-        WebDriver driver = DriverFactory.getDriverForMobile(getConfig().mobileRunMode()).getDriver(driverData);
-        driver.quit();
-    }
-
-    public static void tearDown() {
-    }
+    public static void quitDriver() {
+        if(DriverManager.getDriver() != null) {
+        DriverManager.getDriver().quit();
+        DriverManager.unload();
+    }}
 }

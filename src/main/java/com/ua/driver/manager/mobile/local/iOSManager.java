@@ -16,8 +16,11 @@ public class iOSManager {
 
     public static WebDriver getDriver() {
         XCUITestOptions options = new XCUITestOptions();
-        options.setDeviceName("iPhone 13 Pro Max")
-                .setApp(System.getProperty("user.dir") + "/ios-app.zip");
+        options.setDeviceName("iPhone 15 Pro")
+                .setApp(System.getProperty("user.home") + "/Downloads/SoftwareSetup/TestApps/ios/Payload/TestApp.app");
+//        options.setDeviceName("iPhone 15 Pro")
+//                .setApp("/Users/srivi/Downloads/SoftwareSetup/TestApps/ios/Payload/TestApp.app");
+
         return new IOSDriver(ConfigFactory.getConfig().localAppiumServerURL(), options);
     }
 }

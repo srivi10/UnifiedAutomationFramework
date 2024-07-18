@@ -35,6 +35,7 @@ public interface FrameWorkConfig extends Config {
     RunModeType mobileRunMode();
 
     @Key("mobileRemoteMode")
+    @ConverterClass(StringToMobileRemoteModeTypeConverter.class)
     MobileRemoteModeType mobileRemoteMode();
 
     @ConverterClass(ConverStringtoURL.class)

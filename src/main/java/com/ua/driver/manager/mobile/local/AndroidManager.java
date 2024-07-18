@@ -25,7 +25,7 @@ public final class AndroidManager {
                     .setUdid("emulator-5554")
                     .setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2)
                     .setDeviceName("Pixel 3a API 34")
-                    .setApp("/Users/srivi/Downloads/SoftwareSetup/TestApps/Android/mda-2.0.2-23.apk");
+                    .setApp(System.getProperty("user.home") + "/Downloads/SoftwareSetup/TestApps/Android/mda-2.0.2-23.apk");
             Thread.sleep(5000);
             return new AndroidDriver(new URL("http://10.0.0.201:4723"), options);
         } catch (SessionNotCreatedException | InterruptedException e) {
