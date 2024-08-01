@@ -11,10 +11,19 @@ import java.net.URL;
 @Config.Sources({
         "system:properties",
         "system:env",
-        "file:${user.dir}/src/test/resources/config.properties"
+        "file:${user.dir}/src/test/resources/config.properties",
+        "file:${user.dir}/src/test/resources/staging-config.properties",
+        "file:${user.dir}/src/test/resources/dev-staging-config.properties"
 })
 
 public interface FrameWorkConfig extends Config {
+
+    @DefaultValue("staging")
+    String environment();
+
+    @Key("${environment}.webURL")
+    String webURL();
+
     @DefaultValue("CHROME")
     @ConverterClass(ConverterStringToBrowser.class)
     BrowserType browser();

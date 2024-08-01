@@ -18,7 +18,13 @@ public class Driver {
         WebDriverData driverData = new WebDriverData(getConfig().browser(), getConfig().browserRemoteMode());
         WebDriver driver = DriverFactory.getDriverForWeb(getConfig().browserRunMode()).getDriver(driverData);
         DriverManager.setDriver(driver);
+        loadURL();
+
     }}
+
+    public static void loadURL(){
+        DriverManager.getDriver().get(getConfig().webURL());
+    }
 
     public static void initDriverForMobile() throws NullPointerException {
 

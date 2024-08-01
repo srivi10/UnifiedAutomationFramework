@@ -1,0 +1,16 @@
+{
+  "users": {
+    "admin": {
+      "username": "Admin",
+      "password": "admin123"
+    },
+    "manager": {
+      "username": "managerUsername",
+      "password": "managerPassword"
+    },
+    "employee": {
+      "username": "employeeUsername",
+      "password": "employeePassword"
+    }
+  }
+}

@@ -1,16 +1,16 @@
-package com.ua.test.mobile;
+package com.ua.test.web;
 
 import com.ua.driver.Driver;
 import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
 
-public class MobileBase {
+public class WebBase {
 
-    @SneakyThrows
+  @SneakyThrows
     @Before
     public void setUP(){
-        Driver.initDriverForMobile();
+        Driver.initDriverForWeb();
     }
 
     @After
