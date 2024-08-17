@@ -11,6 +11,17 @@ public class WebLocators {
     public static final String MENU= "//span[text()='%s']";
     public final By ADMINPAGE=By.xpath("//h6[text()='Admin']");
 
+
     //Home Page Locators
     public final By HOMEPAGE =By.xpath("//ul[@class='oxd-main-menu']");
+    public final By PIMPAGE=By.xpath("//h6[text()='PIM']");
+    public final By LEAVEPAGE=By.xpath("//h6[text()='Leave']");
+    public final By TIMEPAGE=By.xpath("//h6[text()='Time']");
+    public final By RECRUITMENTPAGE=By.xpath("//h6[text()='Recruitment']");
+    public final By MYINFOPAGE=By.xpath("//img[@class='employee-image' and @alt='profile picture']");
+
+    public final By PERFORMANCEPAGE =By.xpath("//h6[text()='Performance']");
+    public final By DASHBOARDPAGE=By.xpath("//h6[text()='Dashboard']");
+    public final By DIRECTORYPAGE=By.xpath("//h6[text()='Directory']");
+
 }

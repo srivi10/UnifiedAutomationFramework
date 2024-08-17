@@ -40,7 +40,7 @@ public class WebTest extends WebBase {
     @Order(1)
     public void loginHRM() throws InterruptedException, MalformedURLException {
         // loginPage.getUserCredential("admin");
-        System.out.println("Username is" + " " + credentials.getUsername());
+        //System.out.println("Username is" + " " + credentials.getUsername());
         // loginPage.loginTOApplication(credentials.getUsername(), credentials.getPassword());
         SeleniumPageActionsHelper.validateElementPresent(webLocators.HOMEPAGE);
     }
@@ -50,5 +50,60 @@ public class WebTest extends WebBase {
     public void ClickAdmin() {
         homePage.clickMenuItem(MenuType.ADMIN);
         SeleniumPageActionsHelper.validateElementPresent(webLocators.ADMINPAGE);
+    }
+    @Test
+    @Order(3)
+    public void ClickPIM() {
+        homePage.clickMenuItem(MenuType.PIM);
+        SeleniumPageActionsHelper.validateElementPresent(webLocators.PIMPAGE);
+    }
+
+    @Test
+    @Order(4)
+    public void ClickLeave() {
+        homePage.clickMenuItem(MenuType.LEAVE);
+        SeleniumPageActionsHelper.validateElementPresent(webLocators.LEAVEPAGE);
+    }
+
+    @Test
+    @Order(5)
+    public void ClickTime() {
+        homePage.clickMenuItem(MenuType.TIME);
+        SeleniumPageActionsHelper.validateElementPresent(webLocators.TIMEPAGE);
+    }
+
+    @Test
+    @Order(6)
+    public void ClickRecruitment() {
+        homePage.clickMenuItem(MenuType.RECRUITMENT);
+        SeleniumPageActionsHelper.validateElementPresent(webLocators.RECRUITMENTPAGE);
+    }
+
+    @Test
+    @Order(7)
+    public void ClickMYINFO() {
+        homePage.clickMenuItem(MenuType.MYINFO);
+        SeleniumPageActionsHelper.validateElementPresent(webLocators.MYINFOPAGE);
+    }
+
+    @Test
+    @Order(8)
+    public void ClickPerformance() {
+        homePage.clickMenuItem(MenuType.PERFORMANCE);
+        SeleniumPageActionsHelper.validateElementPresent(webLocators.PERFORMANCEPAGE);
+    }
+
+    @Test
+    @Order(9)
+    public void ClickDashboard() {
+        homePage.clickMenuItem(MenuType.DASHBOARD);
+        SeleniumPageActionsHelper.validateElementPresent(webLocators.DASHBOARDPAGE);
+    }
+
+    @Test
+    @Order(10)
+    public void ClickDirectory() {
+        homePage.clickMenuItem(MenuType.DIRECTORY);
+        SeleniumPageActionsHelper.validateElementPresent(webLocators.DIRECTORYPAGE);
     }
 }

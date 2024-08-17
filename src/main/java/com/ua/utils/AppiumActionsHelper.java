@@ -1,14 +1,11 @@
 package com.ua.utils;
 
-import com.ua.driver.Driver;
 import com.ua.driver.DriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.io.FileHandler;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.junit.runner.Description;
 
 
 import java.io.File;
@@ -18,35 +15,22 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.NoSuchElementException;
 
-public class SeleniumPageActionsHelper {
+public class AppiumActionsHelper {
 
-    private SeleniumPageActionsHelper(){}
-
-    public static void clickElement(By by) {
-        waitForElement(by);
-        DriverManager.getDriver().findElement(by).click();
-    }
-
-    public static void sendKeys(By by, String value) {
-        waitForElement(by);
-        DriverManager.getDriver().findElement(by).sendKeys(value);
-    }
-
-    public static void validateElementPresent(By locator) throws NoSuchElementException {
+    public static void validateElementPresent(By by) throws NoSuchElementException {
         try {
-            waitForElement(locator);
+            waitForElement(by);
             takeScreenshot();
-            WebElement element = DriverManager.getDriver().findElement(locator);
-            Assert.assertTrue("Element is Found: " + locator.toString(),element.isDisplayed());
+            WebElement element = DriverManager.getDriver().findElement(by);
+            Assert.assertTrue("Element is Found: " + by.toString(), element.isDisplayed());
         } catch (NoSuchElementException e) {
-            Assert.fail("Element not found: " + locator.toString());
+            Assert.fail("Element not found: " + by.toString());
         }
     }
 
-    public static void waitForElement(By locator) {
-
+    public static void waitForElement(By by) {
         WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(3));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
     private static void takeScreenshot() {
@@ -54,9 +38,9 @@ public class SeleniumPageActionsHelper {
         TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
         File screenshot = takesScreenshot.getScreenshotAs(OutputType.FILE);
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File destinationFile = new File("screenshots/web/" +  timestamp + ".png");
+        File destinationFile = new File("screenshots/web/" + timestamp + ".png");
 
-       // File destinationFile = new File("screenshots/webTest" + methodName + ".png");
+        // File destinationFile = new File("screenshots/webTest" + methodName + ".png");
 
         try {
             destinationFile.getParentFile().mkdirs();
@@ -65,5 +49,10 @@ public class SeleniumPageActionsHelper {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void clickElement(By by) {
+        waitForElement(by);
+        DriverManager.getDriver().findElement(by).click();
     }
 }

@@ -28,7 +28,7 @@ public class Driver {
 
     public static void initDriverForMobile() throws NullPointerException {
 
-            MobileDriverData driverData = new MobileDriverData(MobilePlatformType.IOS, getConfig().mobileRemoteMode());
+            MobileDriverData driverData = new MobileDriverData(MobilePlatformType.ANDROID, getConfig().mobileRemoteMode());
             WebDriver driver = DriverFactory.getDriverForMobile(getConfig().mobileRunMode()).getDriver(driverData);
             DriverManager.setDriver(driver);
     }
